@@ -29,6 +29,8 @@ namespace TicTacToe
 
         public static bool turn = true;
         public static string winner = "";
+        public static int point1 = 0;
+        public static int point2 = 0;
 
         private void UserClick(Button btn)
         {
@@ -39,21 +41,21 @@ namespace TicTacToe
                 if (btn.Name == "btn1_1")
                     Cells.C1_1 = (turn) ? "X" : "O";
                 else if (btn.Name == "btn1_2")
-                    Cells.C1_2 = (turn) ? "X" : "0";
+                    Cells.C1_2 = (turn) ? "X" : "O";
                 else if (btn.Name == "btn1_3")
-                    Cells.C1_3 = (turn) ? "X" : "0";
+                    Cells.C1_3 = (turn) ? "X" : "O";
                 else if (btn.Name == "btn2_1")
-                    Cells.C2_1 = (turn) ? "X" : "0";
+                    Cells.C2_1 = (turn) ? "X" : "O";
                 else if (btn.Name == "btn2_2")
-                    Cells.C2_2 = (turn) ? "X" : "0";
+                    Cells.C2_2 = (turn) ? "X" : "O";
                 else if (btn.Name == "btn2_3")
-                    Cells.C2_3 = (turn) ? "X" : "0";
+                    Cells.C2_3 = (turn) ? "X" : "O";
                 else if (btn.Name == "btn3_1")
-                    Cells.C3_1 = (turn) ? "X" : "0";
+                    Cells.C3_1 = (turn) ? "X" : "O";
                 else if (btn.Name == "btn3_2")
-                    Cells.C3_2 = (turn) ? "X" : "0";
+                    Cells.C3_2 = (turn) ? "X" : "O";
                 else if (btn.Name == "btn3_3")
-                    Cells.C3_3 = (turn) ? "X" : "0";
+                    Cells.C3_3 = (turn) ? "X" : "O";
 
                 turn = !turn;
                 btn.IsEnabled = false;
@@ -61,6 +63,39 @@ namespace TicTacToe
                 //Game();
             }
             Game();
+        }
+
+        private void ResetTable()
+        {
+            Cells.C1_1 = "";
+            Cells.C1_2 = "";
+            Cells.C1_3 = "";
+            Cells.C2_1 = "";
+            Cells.C2_2 = "";
+            Cells.C2_3 = "";
+            Cells.C3_1 = "";
+            Cells.C3_2 = "";
+            Cells.C3_3 = "";
+
+            btn1_1.Content = "";
+            btn1_2.Content = "";
+            btn1_3.Content = "";
+            btn2_1.Content = "";
+            btn2_2.Content = "";
+            btn2_3.Content = "";
+            btn3_1.Content = "";
+            btn3_2.Content = "";
+            btn3_3.Content = "";
+
+            btn1_1.IsEnabled = true;
+            btn1_2.IsEnabled = true;
+            btn1_3.IsEnabled = true;
+            btn2_1.IsEnabled = true;
+            btn2_2.IsEnabled = true;
+            btn2_3.IsEnabled = true;
+            btn3_1.IsEnabled = true;
+            btn3_2.IsEnabled = true;
+            btn3_3.IsEnabled = true;
         }
 
         private void Game()
@@ -129,13 +164,22 @@ namespace TicTacToe
 
             #endregion
 
-            #region Cross Wins (this is not working)
+            #region Cross Wins
 
-            if (!btn1_1.IsEnabled && !btn2_2.IsEnabled && btn3_3.IsEnabled)
+            if (!btn1_1.IsEnabled && !btn2_2.IsEnabled && !btn3_3.IsEnabled)
             {
                 if (Cells.C1_1 == Cells.C2_2 && Cells.C1_1 == Cells.C3_3)
                 {
                     winner = (Cells.C1_1 == "X") ? Players.Player1 : Players.Player2;
+                    win = true;
+                }
+            }
+
+            if (!btn3_1.IsEnabled && !btn2_2.IsEnabled && !btn1_3.IsEnabled)
+            {
+                if (Cells.C3_1 == Cells.C2_2 && Cells.C3_1 == Cells.C1_3)
+                {
+                    winner = (Cells.C3_1 == "X") ? Players.Player1 : Players.Player2;
                     win = true;
                 }
             }
@@ -151,7 +195,22 @@ namespace TicTacToe
             //  }
 
             if (win)
-                MessageBox.Show($"Game is finished! Winner is {winner}!");
+            {
+                MessageBox.Show($"Tour is finished! Winner is {winner}!");
+                ResetTable();
+
+                if (winner == lblPlayer1.Content.ToString())
+                {
+                    point1++;
+                }
+                else if (winner == lblPlayer2.Content.ToString())
+                {
+                    point2++;
+                }
+
+                lblPoint1.Content = point1;
+                lblPoint2.Content = point2;
+            }
 
             #endregion
         }
@@ -199,6 +258,31 @@ namespace TicTacToe
         private void btn3_3_Click(object sender, RoutedEventArgs e)
         {
             UserClick(btn3_3);
+        }
+
+        private void btnResetTheTable_Click(object sender, RoutedEventArgs e)
+        {
+            ResetTable();
+        }
+
+        private void btnFinishTheGame_Click(object sender, RoutedEventArgs e)
+        {
+            string trueWinner = "";
+
+            if (point1 > point2)
+                trueWinner = Players.Player1;
+            else if (point2 > point1)
+                trueWinner = Players.Player2;
+            else if (point1 == point2)
+                trueWinner = "No one";
+
+            ResetTable();
+            point1 = 0;
+            point2 = 0;
+            lblPoint1.Content = point1;
+            lblPoint2.Content = point2;
+
+            MessageBox.Show($"GAME OVER\n{trueWinner} wins the game!");
         }
     }
 }

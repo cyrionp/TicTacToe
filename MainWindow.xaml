@@ -5,7 +5,7 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:TicTacToe"
         mc:Ignorable="d"
-        Title="TicTacToe" Height="450" Width="800">
+        Title="TicTacToe" Height="450" Width="800" WindowStartupLocation="CenterScreen">
     <Grid Background="white">
         <Button Name="btn1_1" Content="" Style="{DynamicResource btnXOX}" HorizontalAlignment="Left" Margin="10,0,0,0" VerticalAlignment="Top" Click="btn1_1_Click"/>
         <Button Name="btn1_2" Content="" Style="{DynamicResource btnXOX}" HorizontalAlignment="Left" Margin="10,140,0,0" VerticalAlignment="Top" Click="btn1_2_Click"/>
@@ -16,8 +16,13 @@
         <Button x:Name="btn3_1" Content="" Style="{DynamicResource btnXOX}" HorizontalAlignment="Left" Margin="290,0,0,0" VerticalAlignment="Top" Click="btn3_1_Click"/>
         <Button x:Name="btn3_2" Content="" Style="{DynamicResource btnXOX}" HorizontalAlignment="Left" Margin="290,140,0,0" VerticalAlignment="Top" Click="btn3_2_Click"/>
         <Button x:Name="btn3_3" Content="" Style="{DynamicResource btnXOX}" HorizontalAlignment="Left" Margin="290,280,0,0" VerticalAlignment="Top" Click="btn3_3_Click"/>
-        <Label Name="lblPlayer1" Content="Label" HorizontalAlignment="Left" Margin="528,169,0,0" VerticalAlignment="Top" Width="137"/>
-        <Label Name="lblPlayer2" Content="Label" HorizontalAlignment="Left" Margin="528,211,0,0" VerticalAlignment="Top" Width="137"/>
+        <Label Name="lblPlayer1" FontFamily="Georgia" FontSize="20" Content="Label" HorizontalAlignment="Left" Margin="472,169,0,0" VerticalAlignment="Top" Width="137"/>
+        <Label Name="lblPlayer2" FontFamily="Georgia" FontSize="20" Content="Label" HorizontalAlignment="Left" Margin="472,236,0,0" VerticalAlignment="Top" Width="137"/>
+        <Label Name="lblPoint1" FontSize="20" Content="0" FontFamily="Segoe UI Black" HorizontalAlignment="Left" Margin="657,166,0,0" VerticalAlignment="Top" Width="100" Foreground="Red"/>
+        <Label Name="lblPoint2" FontSize="20" Content="0" FontFamily="Segoe UI Black" HorizontalAlignment="Left" Margin="657,233,0,0" VerticalAlignment="Top" Width="100" Foreground="Red"/>
+        <Button x:Name="btnResetTheTable" Content="Reset the Table" FontSize="16" HorizontalAlignment="Left" Margin="472,343,0,0" VerticalAlignment="Top" Width="125" Height="57" Click="btnResetTheTable_Click"/>
+        <Button x:Name="btnFinishTheGame" Content="Finish the Game" FontSize="16" HorizontalAlignment="Left" Margin="632,343,0,0" VerticalAlignment="Top" Width="125" Height="57" Click="btnFinishTheGame_Click"/>
+        <Image ToolTip="Made by Abdulkadir Durmaz" Margin="545,10,125.333,278.667" Source="logo.png"/>
 
     </Grid>
 </Window>
